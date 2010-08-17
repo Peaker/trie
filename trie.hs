@@ -7,14 +7,10 @@ import Control.Arrow((***), (&&&))
 import Control.Monad(forever)
 import Control.Exception(evaluate)
 import Data.Monoid(Monoid(..))
--- import Data.Set(Set)
--- import qualified Data.Set as Set
 import qualified Data.Map as Map
 import Data.Map(Map)
 import Wrapper(Wrapper(..), inWrapper2)
 import System.Environment(getArgs)
--- import Data.MemoTrie(HasTrie)
--- import MemoSet(memoSet)
 
 newtype Trie k v = Trie { unTrie :: (v, Map k (Trie k v)) }
   deriving (Show, Read, Eq, Ord)
@@ -70,15 +66,6 @@ substringTrie = prefixTrie . suffixTrie
 lookup :: (Ord k, Monoid v) => [k] -> Trie k v -> v
 lookup [] = fst . unTrie
 lookup (k:ks) = maybe mempty (lookup ks) . Map.lookup k . snd . unTrie
-
--- newtype MSet a = MSet (Set a)
---   deriving (Eq, Ord, Show, Read)
--- instance NFData a => NFData (MSet a) where
---   rnf (MSet x) = rnf x
-
--- instance (HasTrie k, Ord k) => Monoid (MSet k) where
---   mempty = MSet mempty
---   MSet x `mappend` MSet y = MSet . memoSet $ x `mappend` y
 
 main :: IO ()
 main = do
