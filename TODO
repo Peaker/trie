@@ -1,0 +1,13 @@
+(v, Map k (Trie k v))
+
+* Represent optimized tries as tries with [k] instead of k for keys:
+
+  * (v, Map [k] (Trie k v))
+
+  and then manually enforce invariant that the keys don't share any prefix,
+  or as tries with normal keys but mandatory suffixes in each key?
+
+  * (v, Map k ([k], Trie k v))
+
+  This way, you cannot really represent an invalid trie, and it is
+  easier to merge...

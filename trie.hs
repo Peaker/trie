@@ -9,7 +9,7 @@ import Control.Exception(evaluate)
 import Data.Monoid(Monoid(..))
 import qualified Data.Map as Map
 import Data.Map(Map)
-import Wrapper(Wrapper(..), inWrapper2)
+import Data.Wrapper(Wrapper(..), inWrapper2)
 import System.Environment(getArgs)
 
 newtype Trie k v = Trie { unTrie :: (v, Map k (Trie k v)) }
